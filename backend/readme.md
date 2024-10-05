@@ -9,8 +9,8 @@
 ## Instalação
 
 **Clone o repositório:**
-   git clone https://github.com/maykol.souza/projeto.git
-   cd projeto/backend
+   https://github.com/Maykol-Souza/recrutamento-digisac
+   cd recrutamento-digisac/backend
 
 ## Instale as dependências:
 
