@@ -11,7 +11,7 @@
 **Clone o repositório:**
    ```
 git clone https://github.com/Maykol-Souza/recrutamento-digisac.git
-cd Recrutamento-interno
+cd recrutamento-dnterno\backend
 ```
 
 ## Instale as dependências:
