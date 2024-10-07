@@ -5,7 +5,7 @@ function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newProduct, setNewProduct] = useState({ nome: '', preco: '', quantidade: '' });
+  const [newProduct, setNewProduct] = useState({ nome: '', price: '', quantity: '' });
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar se estamos editando
   const [editProductId, setEditProductId] = useState(null); // ID do produto que está sendo editado
 
@@ -36,9 +36,9 @@ function ProductList() {
 
   // Função para adicionar um novo produto
   const addProduct = async () => {
-    const { nome, preco, quantidade } = newProduct;
+    const { nome, price, quantity } = newProduct;
 
-    if (!nome || !preco || !quantidade) {
+    if (!nome || !price|| !quantity) {
       window.alert('Por favor, preencha todos os campos do produto.');
       return;
     }
@@ -58,7 +58,7 @@ function ProductList() {
 
       const product = await response.json();
       setProducts([...products, product]);
-      setNewProduct({ nome: '', preco: '', quantidade: '' });
+      setNewProduct({ nome: '', price: '', quantity: '' });
     } catch (err) {
       setError(err.message);
     }
@@ -78,23 +78,23 @@ function ProductList() {
 
   // Função para iniciar a edição de um produto
   const startEditProduct = (product) => {
-    setNewProduct(product); // Preenche o formulário com os dados do produto
+    setNewProduct(product);
     setIsEditing(true); // Habilita o modo de edição
-    setEditProductId(product.id); // Armazena o ID do produto a ser editado
+    setEditProductId(product.id);
   };
 
   // Função para salvar as alterações do produto
   const saveProduct = async () => {
-    const { nome, preco, quantidade } = newProduct;
+    const { nome, price, quantity } = newProduct;
 
-    if (!nome || !preco || !quantidade) {
+    if (!nome || !price || !quantity) {
       window.alert('Por favor, preencha todos os campos do produto.');
       return;
     }
 
     try {
       const response = await fetch(`http://localhost:5000/products/${editProductId}`, {
-        method: 'PUT', // Utiliza o método PUT para atualizar o produto
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -108,7 +108,7 @@ function ProductList() {
       const updatedProduct = await response.json();
       setProducts(products.map(product => (product.id === editProductId ? updatedProduct : product)));
       setIsEditing(false); // Sai do modo de edição
-      setNewProduct({ nome: '', preco: '', quantidade: '' }); // Limpa o formulário
+      setNewProduct({ nome: '', price: '', quantity: '' });
       setEditProductId(null); // Reseta o ID do produto em edição
     } catch (err) {
       setError(err.message);
@@ -132,8 +132,8 @@ function ProductList() {
             {products.map(product => (
               <li key={product.id}>
                 <strong>{product.nome}</strong> 
-                <span>R${product.preco}</span>
-                <span>Quantidade: {product.quantidade}</span>
+                <span>R${product.price}</span>
+                <span>Quantidade: {product.quantity}</span>
                 <button onClick={() => startEditProduct(product)}>Editar</button>
                 <button onClick={() => deleteProduct(product.id)}>Excluir</button>
               </li>
@@ -155,16 +155,16 @@ function ProductList() {
           <label>
             Preço: <input 
               type="number" 
-              value={newProduct.preco} 
-              onChange={(e) => setNewProduct({ ...newProduct, preco: e.target.value })} 
+              value={newProduct.price} 
+              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} 
             />
           </label>
 
           <label>
             Quantidade: <input 
               type="number" 
-              value={newProduct.quantidade} 
-              onChange={(e) => setNewProduct({ ...newProduct, quantidade: e.target.value })} 
+              value={newProduct.quantity} 
+              onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })} 
             />
           </label>
 

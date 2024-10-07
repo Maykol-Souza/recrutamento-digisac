@@ -17,30 +17,29 @@ const salvarProdutos = (produtos) => {
 // Função para listar todos os produtos com filtros e ordenação
 const listarProdutos = (req, res) => {
   try {
-    const produtos = lerProdutos(); // Lê os produtos do arquivo JSON
-    let filteredProducts = produtos; // Inicia a lista filtrada como todos os produtos
+    const produtos = lerProdutos();
+    let filteredProducts = produtos; 
 
-    // Filtragem por nome
     if (req.query.nome) {
-      const nameFilter = req.query.nome.toLowerCase(); // Converte o filtro para minúsculas
+      const nameFilter = req.query.nome.toLowerCase();
       filteredProducts = filteredProducts.filter(product =>
-        product.nome && product.nome.toLowerCase().includes(nameFilter) // Verifica se o nome do produto contém o filtro
+        product.nome && product.nome.toLowerCase().includes(nameFilter)
       );
     }
 
-    // Filtragem por preço
-    if (req.query.preco) {
-      const precoFilter = parseFloat(req.query.preco); // Converte para número
-      filteredProducts = filteredProducts.filter(product => product.preco === precoFilter); // Filtra pelo preço exato
+    if (req.query.price) {
+      const precoFilter = parseFloat(req.query.price);
+      filteredProducts = filteredProducts.filter(product => 
+        Math.abs(product.price - precoFilter) < 0.01
+      );
     }
 
-    // Filtragem por quantidade
-    if (req.query.quantidade) {
-      const quantidadeFilter = parseInt(req.query.quantidade, 10); // Converte para número
-      filteredProducts = filteredProducts.filter(product => product.quantidade === quantidadeFilter); // Filtra pela quantidade exata
+
+if (req.query.quantity) {
+  const quantidadeFilter = parseInt(req.query.quantity, 10);
+  filteredProducts = filteredProducts.filter(product => parseInt(product.quantity, 10) === quantidadeFilter);
     }
 
-    // Verifica se algum produto foi encontrado
     if (filteredProducts.length === 0) {
       return res.status(404).json({ message: 'Nenhum produto encontrado' });
     }
@@ -48,20 +47,19 @@ const listarProdutos = (req, res) => {
     // Ordenação por quantidade
     if (req.query.orderBy) {
       if (req.query.orderBy === 'quantity-asc') {
-        filteredProducts.sort((a, b) => a.quantidade - b.quantidade); // Ordenação crescente
+        filteredProducts.sort((a, b) => a.quantity - b.quantity); // Ordenação crescente
       } else if (req.query.orderBy === 'quantity-desc') {
-        filteredProducts.sort((a, b) => b.quantidade - a.quantidade); // Ordenação decrescente
+        filteredProducts.sort((a, b) => b.quantity - a.quantity); // Ordenação decrescente
       }
     }
 
     return res.json(filteredProducts); // Retorna os produtos filtrados
   } catch (error) {
-    console.error('Erro ao listar produtos:', error); // Log do erro no console
-    res.status(500).json({ message: 'Erro interno do servidor' }); // Responde com erro 500
+    console.error('Erro ao listar produtos:', error);
+    res.status(500).json({ message: 'Erro interno do servidor' });
   }
 };
 
-// Função para obter um produto por ID
 const obterProdutoPorId = (req, res) => {
   const produtos = lerProdutos();
   const product = produtos.find(p => p.id === parseInt(req.params.id));
@@ -73,17 +71,16 @@ const obterProdutoPorId = (req, res) => {
 };
 
 
-// Função para adicionar um novo produto
+
 const adicionarProduto = (req, res) => {
-  const { nome, preco, quantidade } = req.body;
+  const { nome, price, quantity } = req.body;
   const produtos = lerProdutos();
 
-  // Definindo valores padrão para os campos
   const newProduct = {
     id: produtos.length > 0 ? produtos[produtos.length - 1].id + 1 : 1,
-    nome: nome || 'null', // Se não for fornecido, define como string vazia
-    preco: preco !== undefined ? preco : 0, // Se não for fornecido, define como 0
-    quantidade: quantidade !== undefined ? quantidade : 0 // Se não for fornecido, define como 0
+    nome: nome || 'null',
+    price: price !== undefined ? quantity : 0,
+    quantity: quantity !== undefined ? quantity : 0
   };
 
   produtos.push(newProduct);
@@ -99,18 +96,16 @@ const atualizarProduto = (req, res) => {
   if (productIndex === -1) {
     return res.status(404).json({ message: 'Produto não encontrado' });
   }
-  /* 
-  No stackoverflow achei essa informação "!== undefined" caso o valor não seja declarado, não tenha alteração em outro campo
-  */
-  const { nome, preco, quantidade } = req.body;
+
+  const { nome, price, quantity } = req.body;
   if (nome) {
-    produtos[productIndex].nome = nome; // Atualiza o nome se fornecido
+    produtos[productIndex].nome = nome; 
   }
-  if (preco !== undefined) {
-    produtos[productIndex].preco = preco; // Atualiza o preço se fornecido
+  if (price !== undefined) {
+    produtos[productIndex].price = price; 
   }
-  if (quantidade !== undefined) {
-    produtos[productIndex].quantidade = quantidade; // Atualiza a quantidade se fornecida
+  if (quantity !== undefined) {
+    produtos[productIndex].quantity = quantity;
   }
 
   salvarProdutos(produtos);

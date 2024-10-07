@@ -30,7 +30,6 @@ Certifique-se de estar na pasta do projeto e execute:
 ```
 npm install
 npm install react-scripts
-npm install
 npm install express
 npm install nodemon --save-dev
 ```
