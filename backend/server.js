@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Para habilitar CORS, se necessário
+const cors = require('cors');
 const app = express();
 const portaServer = 5000;
 
@@ -13,7 +13,7 @@ const {
 } = require('./catalogoProdutos');
 
 app.use(express.json());
-app.use(cors()); // Para permitir requisições de outras origens (se necessário)
+app.use(cors());
 
 // Rotas - Usando as funções importadas de catalogoProdutos.js
 app.get('/products', listarProdutos);
@@ -22,7 +22,7 @@ app.post('/products', adicionarProduto);
 app.put('/products/:id', atualizarProduto);
 app.delete('/products/:id', deletarProduto);
 
-// Iniciar o servidor
+
 app.listen(portaServer, () => {
   console.log(`Servidor rodando na porta ${portaServer}`);
 });

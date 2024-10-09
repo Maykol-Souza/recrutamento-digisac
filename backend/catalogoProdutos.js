@@ -19,7 +19,6 @@ const listarProdutos = (req, res) => {
     const produtos = lerProdutos();
     let filteredProducts = produtos; 
 
-    // Filtragem por nome
     if (req.query.nome) {
       const nameFilter = req.query.nome.toLowerCase();
       filteredProducts = filteredProducts.filter(product =>
@@ -39,7 +38,6 @@ const listarProdutos = (req, res) => {
       filteredProducts = filteredProducts.filter(product => product.quantity === quantidadeFilter);
     }
 
-    // Verifica se algum produto foi encontrado
     if (filteredProducts.length === 0) {
       return res.status(404).json({ message: 'Nenhum produto encontrado' });
     }
@@ -47,9 +45,9 @@ const listarProdutos = (req, res) => {
     // Ordenação por quantidade
     if (req.query.orderBy) {
       if (req.query.orderBy === 'quantity-asc') {
-        filteredProducts.sort((a, b) => a.quantity - b.quantity);
+        filteredProducts.sort((a, b) => a.quantity - b.quantity); // Ordenação crescente
       } else if (req.query.orderBy === 'quantity-desc') {
-        filteredProducts.sort((a, b) => b.quantity - a.quantity);
+        filteredProducts.sort((a, b) => b.quantity - a.quantity); // Ordenação decrescente
       }
     }
 
@@ -60,7 +58,6 @@ const listarProdutos = (req, res) => {
   }
 };
 
-// Função para obter um produto por ID
 const obterProdutoPorId = (req, res) => {
   const produtos = lerProdutos();
   const product = produtos.find(p => p.id === parseInt(req.params.id));
@@ -71,16 +68,14 @@ const obterProdutoPorId = (req, res) => {
   res.json(product);
 };
 
-
 const adicionarProduto = (req, res) => {
   const { nome, price, quantity } = req.body;
   const produtos = lerProdutos();
 
-  // Definindo valores padrão para os campos
   const newProduct = {
     id: produtos.length > 0 ? produtos[produtos.length - 1].id + 1 : 1,
     nome: nome || 'null',
-    price: price !== undefined ? price : 0, // 
+    price: price !== undefined ? price : 0,
     quantity: quantity !== undefined ? quantity : 0 
   };
 
@@ -89,7 +84,6 @@ const adicionarProduto = (req, res) => {
   res.status(201).json(newProduct);
 };
 
-// Atualiza apenas os campos que foram enviados na requisição
 const atualizarProduto = (req, res) => {
   const produtos = lerProdutos();
   const productIndex = produtos.findIndex(p => p.id === parseInt(req.params.id));
@@ -115,8 +109,6 @@ const atualizarProduto = (req, res) => {
   res.json(produtos[productIndex]);
 };
 
-
-// Função para deletar um produto
 const deletarProduto = (req, res) => {
   const produtos = lerProdutos();
   const productIndex = produtos.findIndex(p => p.id === parseInt(req.params.id));

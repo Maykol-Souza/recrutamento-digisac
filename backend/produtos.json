@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+<<<<<<< HEAD
     "nome": "teste",
     "price": "44",
     "quantity": "5"
@@ -10,5 +11,22 @@
     "nome": "test",
     "price": "5.50",
     "quantity": "90"
+=======
+    "nome": "Teste 1",
+    "price": "100",
+    "quantity": "100"
+  },
+  {
+    "id": 2,
+    "nome": "Teste 2 ",
+    "price": "300",
+    "quantity": "400"
+  },
+  {
+    "id": 3,
+    "nome": "Cola-Cola",
+    "price": 50,
+    "quantity": 10
+>>>>>>> 87bf7a57786402266ed50801c346ad813509a7bb
   }
 ]

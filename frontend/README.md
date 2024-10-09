@@ -50,12 +50,13 @@ Antes de começar, certifique-se de ter o seguinte instalado em sua máquina:
 1. Clone o repositório:
    ```
    git clone https://github.com/Maykol-Souza/recrutamento-digisac
-   cd <recrutamento-digisac>
+   cd recrutamento-digisac\frontend
    ```  
 2. Instale as dependências:
 Certifique-se de estar na pasta do projeto e execute:
 ```
 npm install
+npm install react-scripts
 ```
 3. Inicie o servidor:
 Após a instalação das dependências, inicie o projeto com:
