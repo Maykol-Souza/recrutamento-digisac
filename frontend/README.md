@@ -3,16 +3,39 @@
 Este projeto é um catálogo de produtos em React que permite visualizar, adicionar, editar e excluir produtos.
 
 ## Funcionalidades
-- **Visualização de Produtos:** Lista todos os produtos disponíveis no catálogo.
-- **Adicionar Produto:** Permite que novos produtos sejam adicionados ao catálogo.
-- **Editar Produto:** Possibilita a edição das informações de produtos já existentes.
-- **Remover Produto:** Permite a exclusão de produtos do catálogo.
+- **Adicionar Produto**: Permite adicionar um novo produto ao catálogo.
+- **Editar Produto**: Permite editar as informações de um produto existente.
+- **Excluir Produto**: Permite remover um produto do catálogo.
+- **Visualizar Carrinho**: Mostra todos os produtos no carrinho e o total da compra.
 
 ## Tecnologias Utilizadas
 
 - **Frontend:** React
 - **Backend:** Node.js (express), para gerenciar as rotas e dados dos produtos.
 - **Banco de Dados:** JSON (product.json)
+- **React**
+- **Hooks** (useState, useEffect)
+- **Fetch API** para requisições HTTP
+
+## Estrutura do Projeto
+
+O projeto é dividido em dois componentes principais:
+
+1. **Cart.js**: Gerencia a visualização e manipulação do carrinho de compras.
+2. **AddProducts.js**: Gerencia a adição e edição de produtos.
+
+### Cart.js
+
+- Exibe a lista de produtos no carrinho.
+- Permite editar e excluir produtos.
+- Exibe um resumo da compra com subtotal e total.
+
+### AddProducts.js
+
+- Formulário para adicionar novos produtos ou editar produtos existentes.
+- Valida a entrada dos produtos desejados pelo usuário antes de salvar.
+
+## Executando o Projeto
 
 ## Pré-requisitos
 

@@ -1,58 +1,14 @@
 [
   {
     "id": 1,
-    "nome": "Produto 1",
-    "preco": 100,
-    "quantidade": 10
-  },
-  {
-    "id": 2,
-    "nome": "Produto 2",
-    "preco": 200,
-    "quantidade": 5
+    "nome": "teste",
+    "price": "44",
+    "quantity": "5"
   },
   {
     "id": 3,
-    "nome": "Produto Janelinhaa - Promoção",
-    "preco": 9999,
-    "quantidade": 10
-  },
-  {
-    "id": 4
-  },
-  {
-    "id": 5,
-    "nome": "Teste",
-    "preco": 10,
-    "quantidade": 15
-  },
-  {
-    "id": 6,
-    "nome": "Promoção",
-    "quantidade": 10
-  },
-  {
-    "id": 7,
-    "nome": "Promoção2",
-    "preco": 0,
-    "quantidade": 0
-  },
-  {
-    "id": 8,
-    "nome": "",
-    "preco": 0,
-    "quantidade": 0
-  },
-  {
-    "id": 9,
-    "nome": "null",
-    "preco": 0,
-    "quantidade": 0
-  },
-  {
-    "id": 10,
-    "nome": "null",
-    "preco": 0,
-    "quantidade": 0
+    "nome": "test",
+    "price": "5.50",
+    "quantity": "90"
   }
 ]
